@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Default Hash Driver
@@ -15,7 +16,7 @@ return [
     |
     */
 
-    'driver' => 'bcrypt',
+    "driver" => "bcrypt",
 
     /*
     |--------------------------------------------------------------------------
@@ -28,8 +29,8 @@ return [
     |
     */
 
-    'bcrypt' => [
-        'rounds' => env('BCRYPT_ROUNDS', 10),
+    "bcrypt" => [
+        "rounds" => env("BCRYPT_ROUNDS", 10),
     ],
 
     /*
@@ -43,10 +44,9 @@ return [
     |
     */
 
-    'argon' => [
-        'memory' => 65536,
-        'threads' => 1,
-        'time' => 4,
+    "argon" => [
+        "memory" => 65536,
+        "threads" => 1,
+        "time" => 4,
     ],
-
 ];

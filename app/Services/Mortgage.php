@@ -14,13 +14,11 @@ class Mortgage
     public const MONTHS_IN_YEAR = 12;
 
     public function __construct(
-        protected int     $sizeOfTheLoan = 0,
-        protected int     $lengthInMonths = 0,
-        protected float   $interestRateOnTheLoan = 0,
-        protected string $startDateOfTheLoan = ""
-    )
-    {
-    }
+        protected int $sizeOfTheLoan = 0,
+        protected int $lengthInMonths = 0,
+        protected float $interestRateOnTheLoan = 0,
+        protected string $startDateOfTheLoan = "",
+    ) {}
 
     public function setSizeOfTheLoan(int $size): void
     {
@@ -44,7 +42,7 @@ class Mortgage
 
     public function getSizeOfTheLoan(): int
     {
-       return  $this->sizeOfTheLoan;
+        return $this->sizeOfTheLoan;
     }
 
     public function getLengthInMonths(): int

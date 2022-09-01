@@ -1,6 +1,7 @@
 <?php
 
-use App\Services\Mortgage;
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn() => view("app"));
+Route::get("/", fn() => view("app"));
