@@ -14,25 +14,22 @@
                 <div class="mt-8">
                     <label for="rootFontSize" class="block text-sm font-medium text-gray-700">Amount</label>
                     <div class="mt-1">
-                        <input type="number" step="1" wire:model="sizeOfTheLoan"
-                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full text-3xl border-gray-300 rounded-md"
-                               min="0">
+                        <input type="number" step="1000" wire:model="sizeOfTheLoan"
+                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full text-3xl border-gray-300 rounded-md">
                     </div>
                 </div>
                 <div class="mt-8">
                     <label for="rootFontSize" class="block text-sm font-medium text-gray-700">Interest</label>
                     <div class="mt-1">
                         <input type="number" step="0.01" wire:model="interestRateOnTheLoan"
-                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full text-3xl border-gray-300 rounded-md"
-                               min="0.00">
+                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full text-3xl border-gray-300 rounded-md">
                     </div>
                 </div>
                 <div class="mt-8">
                     <label for="rootFontSize" class="block text-sm font-medium text-gray-700">Number of months</label>
                     <div class="mt-1">
                         <input type="number" step="1" wire:model="lengthInMonths"
-                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full text-3xl border-gray-300 rounded-md"
-                               min="0" max="360">
+                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full text-3xl border-gray-300 rounded-md" max="360">
                     </div>
                 </div>
                 <div class="mt-8">
