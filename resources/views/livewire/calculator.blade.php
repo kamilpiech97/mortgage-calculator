@@ -7,7 +7,7 @@
                         class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                         <span class="block text-indigo-600 xl:inline">Calculator</span>
                     </h1>
-                    <h5>{{ $installment }}</h5>
+                    <h5>{{ props.installment }}</h5>
                 </div>
             </div>
             <div class="mt-12 mx-auto max-w-full sm:max-w-md px-4 sm:px-6">
