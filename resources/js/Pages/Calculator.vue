@@ -2,66 +2,82 @@
 import { useForm } from '@inertiajs/inertia-vue3'
 
 defineProps({
-    installment: {
-        type: Number,
-    },
+  installment: {
+    type: Number,
+    default: 0
+  },
 })
 const mortgageForm = useForm({
-    sizeOfTheLoan: '',
-    interestRateOnTheLoan: '',
-    lengthInMonths: '',
+  sizeOfTheLoan: '',
+  interestRateOnTheLoan: '',
+  lengthInMonths: '',
 })
 
-function mortgageCalc() {
-    mortgageForm.post("/mortgage/calc")
+function mortgageCalc () {
+  mortgageForm
+      .transform(data => ({
+        size_of_the_loan: data.sizeOfTheLoan,
+        interest_rate_on_the_loan: data.interestRateOnTheLoan,
+        length_in_months: data.lengthInMonths,
+      }))
+      .post('/')
 }
 </script>
 <template>
-    <div>
-        <div class="antialiased font-sans">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
-                <div class="mt-10 mx-auto max-w-screen-xl px-4 sm:px-6">
-                    <div class="text-center">
-                        <h1
-                            class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                            <span class="block text-indigo-600 xl:inline">Calculator</span>
-                        </h1>
-                    </div>
-                    <h5 v-if="installment">{{ installment }}</h5>
-                </div>
-                <div class="mt-12 mx-auto max-w-full sm:max-w-md px-4 sm:px-6">
-                    <form @submit.prevent="mortgageCalc">
-                        <div class="mt-8">
-                            <label for="rootFontSize" class="block text-sm font-medium text-gray-700">Amount</label>
-                            <div class="mt-1">
-                                <input type="number" step="1000" v-model="mortgageForm.sizeOfTheLoan"
-                                       class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full text-3xl border-gray-300 rounded-md">
-                            </div>
-                        </div>
-                        <div class="mt-8">
-                            <label for="rootFontSize" class="block text-sm font-medium text-gray-700">Interest</label>
-                            <div class="mt-1">
-                                <input type="number" step="0.01" v-model="mortgageForm.interestRateOnTheLoan"
-                                       class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full text-3xl border-gray-300 rounded-md">
-                            </div>
-                        </div>
-                        <div class="mt-8">
-                            <label for="rootFontSize" class="block text-sm font-medium text-gray-700">Number of
-                                months</label>
-                            <div class="mt-1">
-                                <input type="number" step="1" v-model="mortgageForm.lengthInMonths"
-                                       class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full text-3xl border-gray-300 rounded-md"
-                                       max="360">
-                            </div>
-                        </div>
-                        <div class="mt-8">
-                            <div class="mt-1">
-                                <button type="submit">Calc</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+  <div>
+    <div class="antialiased font-sans">
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-4">
+        <div class="mt-10 mx-auto max-w-screen-xl px-4 sm:px-6">
+          <div class="text-center">
+            <h1 class="tracking-tight font-extrabold text-gray-900 text-4xl">
+              <span class="block text-indigo-600 xl:inline">Mortgage installment calculator</span>
+            </h1>
+          </div>
         </div>
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+          <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form @submit.prevent="mortgageCalc">
+              <div>
+                <label for="rootFontSize" class="block text-sm font-medium text-gray-700">Amount</label>
+                <div class="mt-1">
+                  <input type="number" step="1000" v-model="mortgageForm.sizeOfTheLoan" required
+                      class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                </div>
+              </div>
+              <div class="mt-8">
+                <label for="rootFontSize" class="block text-sm font-medium text-gray-700">Interest rate (%)</label>
+                <div class="mt-1">
+                  <input type="number" step="0.01" v-model="mortgageForm.interestRateOnTheLoan" required
+                      class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                </div>
+              </div>
+              <div class="mt-8">
+                <label for="rootFontSize" class="block text-sm font-medium text-gray-700">Number of months (0 - 360 months)</label>
+                <div class="mt-1">
+                  <input type="number" step="1" v-model="mortgageForm.lengthInMonths" required
+                      class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      max="360">
+                </div>
+              </div>
+              <div class="mt-8">
+                <div class="mt-1">
+                  <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Calculate</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md" v-if="installment">
+          <div class="text-center">
+            <h1 class="tracking-tight font-extrabold text-gray-900 text-4xl">
+              <span class="block text-indigo-600 xl:inline">Installment size</span>
+            </h1>
+          </div>
+          <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 text-center">
+            <h2 class="font-bold text-2xl">{{installment}} zł</h2>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>

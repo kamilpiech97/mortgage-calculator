@@ -6,4 +6,4 @@ use App\Http\Controllers\CalculatorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", [CalculatorController::class, "index"])->name("home");
-Route::post("/mortgage/calc", [CalculatorController::class, "calc"]);
+Route::post("/", [CalculatorController::class, "calculate"]);

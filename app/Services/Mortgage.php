@@ -4,40 +4,35 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Services\Traits\MortgageCalculator;
-use Carbon\Carbon;
-
 class Mortgage
 {
-    use MortgageCalculator;
-
     public const MONTHS_IN_YEAR = 12;
 
     public function __construct(
         protected int $sizeOfTheLoan = 0,
         protected int $lengthInMonths = 0,
         protected float $interestRateOnTheLoan = 0,
-        protected string $startDateOfTheLoan = "",
     ) {}
 
-    public function setSizeOfTheLoan(int $size): void
+    public function setSizeOfTheLoan(int $size): self
     {
         $this->sizeOfTheLoan = $size;
+
+        return $this;
     }
 
-    public function setLengthInMonths(int $months): void
+    public function setLengthInMonths(int $months): self
     {
         $this->lengthInMonths = $months;
+
+        return $this;
     }
 
-    public function setInterestRate(float $interest): void
+    public function setInterestRate(float $interest): self
     {
         $this->interestRateOnTheLoan = $interest;
-    }
 
-    public function setStartDateOfTheLoan(string $date): void
-    {
-        $this->startDateOfTheLoan = $date;
+        return $this;
     }
 
     public function getSizeOfTheLoan(): int
@@ -55,8 +50,9 @@ class Mortgage
         return $this->interestRateOnTheLoan / 100;
     }
 
-    public function getStartDateOfTheLoan(): Carbon
+    public function getInstallmentSize(): float
     {
-        return $this->interestRateOnTheLoan ? Carbon::create($this->startDateOfTheLoan) : Carbon::now();
+        return ($this->getSizeOfTheLoan() * $this->getInterestRateOnTheLoan())
+            / (self::MONTHS_IN_YEAR * (1 - ((self::MONTHS_IN_YEAR / (self::MONTHS_IN_YEAR + $this->getInterestRateOnTheLoan())) ** $this->getLengthInMonths())));
     }
 }

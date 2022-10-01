@@ -1,11 +1,17 @@
 ## Mortgage calculator
+Mortgage Calculator is an application to calculate a mortgage installment for specific data.
+The following calculators are also planned to be implemented:
+- to simulate mortgage overpayments
+- to simulate a mortgage based on historical data
 
+### Simple preview of app
+![Preview of calculator](preview.png)
 ### Installation
 
 Clone the repository:
 
 ```
-git clone https://github.com/MortgageCalculatorTeam/mortgage-calculator.git
+git clone https://github.com/kamilpiech97/mortgage-calculator.git
 ```
 
 Then just follow the steps below:
@@ -42,6 +48,12 @@ make node
     exit
 ```
 
+### Launching the application
+* open app in browser via that url:
+
+```
+localhost:1741
+```
 ### Running tests
 
 You can run PHPUnit test cases

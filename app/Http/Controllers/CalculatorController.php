@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CalculatorRequest;
 use App\Services\Mortgage;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Response;
 
 class CalculatorController extends Controller
@@ -16,15 +15,17 @@ class CalculatorController extends Controller
         return inertia("Calculator");
     }
 
-    public function calc(Request $request, Mortgage $mortgage): Response
+    public function calculate(CalculatorRequest $request, Mortgage $mortgage): Response
     {
-        $mortgage->setSizeOfTheLoan($request->sizeOfTheLoan);
-        $mortgage->setLengthInMonths($request->lengthInMonths);
-        $mortgage->setInterestRate($request->interestRateOnTheLoan);
-//        dd($mortgage->getInstallmentSize());
+        $installmentSize = $mortgage->setSizeOfTheLoan($request->size_of_the_loan)
+            ->setLengthInMonths($request->length_in_months)
+            ->setInterestRate($request->interest_rate_on_the_loan)
+            ->getInstallmentSize();
 
         return inertia("Calculator")
-            ->with(["installment" => $mortgage->getInstallmentSize(),
-                "success" => "success"]);
+            ->with([
+                "installment" => ceil($installmentSize),
+                "success" => "success",
+            ]);
     }
 }
