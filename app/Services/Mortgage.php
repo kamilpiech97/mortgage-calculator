@@ -55,4 +55,17 @@ class Mortgage
         return ($this->getSizeOfTheLoan() * $this->getInterestRateOnTheLoan())
             / (self::MONTHS_IN_YEAR * (1 - ((self::MONTHS_IN_YEAR / (self::MONTHS_IN_YEAR + $this->getInterestRateOnTheLoan())) ** $this->getLengthInMonths())));
     }
+
+    public function getPossibleInstallmentSizes(): array
+    {
+        $installments["{$this->interestRateOnTheLoan}"] = ceil($this->getInstallmentSize());
+
+        for ($i = $this->interestRateOnTheLoan + 10.0; $i > 0; $i = $i - 2.0) {
+            $this->interestRateOnTheLoan = $i;
+
+            $installments["{$this->interestRateOnTheLoan}"] = ceil($this->getInstallmentSize());
+        }
+
+        return $installments;
+    }
 }
