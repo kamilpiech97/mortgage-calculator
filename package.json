@@ -10,7 +10,10 @@
         "@tailwindcss/line-clamp": "^0.4.0",
         "@tailwindcss/typography": "^0.5.4",
         "@vitejs/plugin-vue": "^4.0.0",
-        "vue": "^3.2.39"
+        "apexcharts": "^3.41.0",
+        "vue": "^3.2.39",
+        "vue-chartjs": "^5.1.0",
+        "vue3-apexcharts": "^1.4.1"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.8",
