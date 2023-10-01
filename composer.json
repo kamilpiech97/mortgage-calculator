@@ -11,7 +11,7 @@
         "laravel/framework": "^10.15",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "livewire/livewire": "^2.10"
+        "livewire/livewire": "^3.0"
     },
     "require-dev": {
         "blumilksoftware/codestyle": "^2.4",
